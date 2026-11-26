@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RBC SENDER — Self-Hosted Email Platform</title>
+<style>
+  :root { --green:#00ff41; --green-dim:rgba(0,255,65,.55); --bg:#000600; --panel:rgba(0,25,8,.55); --line:rgba(0,255,65,.18); --txt:#c9ffd8; --dim:#5f8f6e; --red:#ff4d5e; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font-family:ui-monospace,'Cascadia Code','Courier New',monospace; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 60% 40% at 50% -10%, rgba(0,255,65,.09), transparent 60%), radial-gradient(ellipse 40% 30% at 85% 100%, rgba(0,255,65,.05), transparent); pointer-events:none; }
+  a { color:var(--green); text-decoration:none; }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 22px; position:relative; }
+  /* nav */
+  nav { position:sticky; top:0; z-index:50; background:rgba(0,6,0,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:58px; }
+  .logo { font-weight:700; letter-spacing:2px; font-size:15px; }
+  .logo span { color:var(--dim); }
+  .nav-links { display:flex; gap:22px; font-size:12px; }
+  .nav-links a { color:var(--txt); }
+  .nav-links a:hover { color:var(--green); }
+  .btn { display:inline-block; border:1px solid var(--green); color:var(--green); padding:9px 20px; font-size:12px; letter-spacing:1.5px; border-radius:4px; cursor:pointer; background:transparent; font-family:inherit; transition:all .15s; }
+  .btn:hover { background:var(--green); color:#001500; box-shadow:0 0 18px rgba(0,255,65,.4); }
+  .btn-solid { background:var(--green); color:#001500; font-weight:700; }
+  .btn-solid:hover { box-shadow:0 0 24px rgba(0,255,65,.55); }
+  /* hero */
+  .hero { text-align:center; padding:96px 0 70px; }
+  .hero h1 { font-size:clamp(26px,4.6vw,46px); letter-spacing:-.5px; line-height:1.15; margin-bottom:20px; color:#eafff0; }
+  .hero h1 .glow { color:var(--green); text-shadow:0 0 22px rgba(0,255,65,.45); }
+  .hero p { color:var(--dim); font-size:14px; line-height:1.8; max-width:720px; margin:0 auto 34px; }
+  .hero .cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .stats { display:flex; gap:0; justify-content:center; margin-top:56px; border:1px solid var(--line); border-radius:8px; overflow:hidden; flex-wrap:wrap; }
+  .stat { padding:18px 30px; border-right:1px solid var(--line); }
+  .stat:last-child { border-right:0; }
+  .stat b { display:block; color:var(--green); font-size:22px; }
+  .stat i { font-style:normal; color:var(--dim); font-size:10px; letter-spacing:1.5px; }
+  /* sections */
+  section { padding:72px 0; }
+  .sec-head { text-align:center; margin-bottom:44px; }
+  .sec-head h2 { font-size:clamp(19px,3vw,28px); color:#eafff0; letter-spacing:.5px; margin-bottom:10px; }
+  .sec-head p { color:var(--dim); font-size:13px; }
+  .grid { display:grid; gap:16px; }
+  .grid-3 { grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); }
+  .grid-5 { grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:22px; transition:border-color .15s; }
+  .card:hover { border-color:var(--green-dim); }
+  .card .ic { color:var(--green); font-size:18px; display:block; margin-bottom:10px; }
+  .card h3 { color:var(--green); font-size:12px; letter-spacing:1.5px; margin-bottom:8px; }
+  .card p { color:var(--dim); font-size:12px; line-height:1.7; }
+  /* anti-fingerprint */
+  .af { border:1px solid var(--line); border-radius:10px; padding:44px; background:linear-gradient(135deg, rgba(0,255,65,.04), transparent 60%); }
+  .af h2 { color:#eafff0; font-size:clamp(18px,2.6vw,24px); margin-bottom:12px; }
+  .af > p { color:var(--dim); font-size:13px; margin-bottom:30px; }
+  .af-layers { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .layer { border-left:2px solid var(--green); padding-left:14px; }
+  .layer h4 { color:var(--green); font-size:11px; letter-spacing:1px; margin-bottom:6px; }
+  .layer p { color:var(--dim); font-size:11px; line-height:1.6; }
+  /* pricing */
+  .price-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .price { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px 18px; text-align:center; position:relative; }
+  .price.hot { border-color:var(--green); }
+  .price .tag { position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--green); color:#001500; font-size:9px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:3px; }
+  .price h3 { color:var(--txt); font-size:12px; letter-spacing:2px; margin-bottom:14px; }
+  .price .was { display:block; color:var(--dim); font-size:12px; text-decoration:line-through; }
+  .price .amount { display:block; color:var(--green); font-size:30px; font-weight:700; margin:4px 0; }
+  .price .perday { display:block; color:var(--dim); font-size:10px; margin-bottom:16px; }
+  .price .save { color:var(--green-dim); }
+  .price ul { list-style:none; margin:0 0 18px; }
+  .price li { color:var(--dim); font-size:11px; padding:5px 0; border-top:1px solid var(--line); }
+  .pay-note { text-align:center; color:var(--dim); font-size:11px; margin-top:22px; }
+  /* faq */
+  .faq details { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:10px; }
+  .faq summary { cursor:pointer; color:var(--txt); font-size:13px; letter-spacing:.5px; }
+  .faq details p { color:var(--dim); font-size:12px; line-height:1.7; margin-top:10px; }
+  .faq code { color:var(--green); }
+  /* final */
+  .final { text-align:center; padding-bottom:90px; }
+  footer { border-top:1px solid var(--line); padding:22px 0 34px; display:flex; justify-content:space-between; color:var(--dim); font-size:11px; flex-wrap:wrap; gap:8px; }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:26px; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="logo">RBC<span>SENDER</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    </div>
+    <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <h1>The <span class="glow">self-hosted</span> email platform<br>that answers to nobody</h1>
+  <p>15 send engines, RBC Helper AI assistant, live mailbox pools, anti-fingerprint encoding,
+     quota-aware rotation, and beast-mode parallel sending — running on YOUR machine with AES-256 encryption.</p>
+  <div class="cta">
+    <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    <a class="btn" href="#features">Explore Features</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>15</b><i>SEND ENGINES</i></div>
+    <div class="stat"><b>80+</b><i>MERGE TAGS</i></div>
+    <div class="stat"><b>10K</b><i>/DAY PER MAILBOX</i></div>
+    <div class="stat"><b>AES-256</b><i>ENCRYPTION</i></div>
+  </div>
+</header>
+
+<section id="features" class="wrap">
+  <div class="sec-head"><h2>Every tool you need, in one place</h2><p>From AI writing to real-time send control — RBC SENDER handles it all.</p></div>
+  <div class="grid grid-3">
+    <div class="card"><span class="ic">✉</span><h3>CAMPAIGN EDITOR</h3><p>A/B subject variants, preheader, multi-mode content, 80+ merge tags, attachment conversion to PDF/DOCX/EML/ICS — 60+ configurable fields.</p></div>
+    <div class="card"><span class="ic">✦</span><h3>RBC HELPER AI</h3><p>Right-docked AI chatbot with live access to your sender state — writes copy, diagnoses failures, runs actions, applies output straight into your draft.</p></div>
+    <div class="card"><span class="ic">▤</span><h3>VISUAL BUILDER</h3><p>Drag-and-drop blocks, live desktop/mobile preview, merge-tag palette, HTML/text/paste modes, template save/load. No code required.</p></div>
+    <div class="card"><span class="ic">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP + Microsoft RT/CC mailboxes with per-mailbox daily quotas, cooldowns, failover, and one-click verification.</p></div>
+    <div class="card"><span class="ic">▶</span><h3>SEND CONSOLE</h3><p>Live queue control — pause, resume, retry failures, per-account error diagnosis, bounce suppression, scheduled windows, warm-up ramps.</p></div>
+    <div class="card"><span class="ic">⚠</span><h3>SPAM CHECKER + FIXER</h3><p>Scores your draft against trigger words, structure, and auth — then one click sends the issues to AI and applies the fix automatically.</p></div>
+  </div>
+</section>
+
+<section id="engines" class="wrap">
+  <div class="sec-head"><h2>15 send engines</h2><p>Every engine is purpose-built with its own pipeline, auth handling, and error recovery.</p></div>
+  <div class="grid grid-5">
+    <div class="card"><h3>SMTP RELAY</h3><p>Any mail server — Gmail, Outlook, Zoho, custom. SSL/TLS/STARTTLS with DKIM signing.</p></div>
+    <div class="card"><h3>DIRECT-TO-MX</h3><p>Deliver straight to recipient MX on port 25 — no third-party provider needed.</p></div>
+    <div class="card"><h3>OPEN RELAY</h3><p>Auth-free relays and IP-allowlisted hosts, including Google Workspace SMTP relay.</p></div>
+    <div class="card"><h3>PROXY ROUTE</h3><p>Send through HTTP, SOCKS4 or SOCKS5 proxies — rotate egress per send.</p></div>
+    <div class="card"><h3>MS GRAPH</h3><p>Microsoft 365 via Graph API — app-only or delegated auth, full merge support.</p></div>
+    <div class="card"><h3>GMAIL API</h3><p>Google Gmail API with OAuth — required since Google killed app passwords.</p></div>
+    <div class="card"><h3>MS RT POOL</h3><p>Bulk-import refresh-token mailboxes — each sends as itself, 10k/day quota.</p></div>
+    <div class="card"><h3>M365 APP CREDS</h3><p>client_id:secret:tenant imports whole tenants, member mailboxes auto-discovered.</p></div>
+    <div class="card"><h3>SENDGRID API</h3><p>SendGrid v3 — billions of emails monthly, high-deliverability infrastructure.</p></div>
+    <div class="card"><h3>AWS SES API</h3><p>Cheapest at scale ($0.10/1K) — multi-region support included.</p></div>
+    <div class="card"><h3>MAILGUN API</h3><p>Mailgun REST — EU/US regions, routing and validation built in.</p></div>
+    <div class="card"><h3>POSTMARK API</h3><p>Message streams, delivery tracking, industry-leading delivery speeds.</p></div>
+    <div class="card"><h3>BREVO API</h3><p>Transactional + marketing email with built-in analytics.</p></div>
+    <div class="card"><h3>SPARKPOST API</h3><p>Enterprise transmissions API with predictive analytics.</p></div>
+    <div class="card"><h3>MANDRILL + MORE</h3><p>Elastic Email, Mandrill and any OpenAPI-style provider via engine presets.</p></div>
+  </div>
+</section>
+
+<section id="antifingerprint" class="wrap">
+  <div class="af">
+    <h2>An anti-fingerprint engine that makes every email unique</h2>
+    <p>Six randomization layers applied per-send — no two emails share a structural fingerprint.</p>
+    <div class="af-layers">
+      <div class="layer"><h4>STRUCTURAL RANDOMIZATION</h4><p>HTML structure is rewritten per send — attribute order, whitespace, entity encoding. No pattern-matching.</p></div>
+      <div class="layer"><h4>SPAM WORD PROTECTION</h4><p>Trigger words neutralized with invisible unicode techniques — clean copy for readers, unreadable for filters.</p></div>
+      <div class="layer"><h4>IMAGE REPROCESSING</h4><p>Attachments and inline images recompressed with unique metadata per send.</p></div>
+      <div class="layer"><h4>CONTENT VARIATION</h4><p>Subject and from-name variants rotate automatically — trillions of unique combinations.</p></div>
+      <div class="layer"><h4>UNIQUE ATTACHMENTS</h4><p>PDF/DOCX/EML files generated fresh per recipient — never byte-identical twice.</p></div>
+      <div class="layer"><h4>SENDER IDENTITY VARIATION</h4><p>Headers, X-Mailer and message-ID domains vary per send — no signature grouping.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="wrap">
+  <div class="sec-head"><h2>Simple pricing — 10% under Titan</h2><p>Every feature in every plan. Plans differ only by duration.</p></div>
+  <div class="price-grid">
+    <div class="price">
+      <h3>WEEKLY</h3>
+      <span class="was">$79</span>
+      <span class="amount">$71</span>
+      <span class="perday">$10.14/day</span>
+      <ul><li>1 Week — 7 days</li><li>28 AI credits</li><li>All features included</li></ul>
+      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    </div>
+    <div class="price">
+      <h3>BIWEEKLY</h3>
+      <span class="was">$159</span>
+      <span class="amount">$143</span>
+      <span class="perday">$10.21/day</span>
+      <ul><li>2 Weeks — 14 days</li><li>56 AI credits</li><li>All features included</li></ul>
+      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    </div>
+    <div class="price">
+      <h3>STARTER</h3>
+      <span class="was">$349</span>
+      <span class="amount">$314</span>
+      <span class="perday">$10.13/day</span>
+      <ul><li>1 Month — 31 days</li><li>120 AI credits</li><li>All features included</li></ul>
+      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    </div>
+    <div class="price hot">
+      <span class="tag">MOST POPULAR</span>
+      <h3>PROFESSIONAL</h3>
+      <span class="was">$649</span>
+      <span class="amount">$584</span>
+      <span class="perday">$9.57/day <span class="save">· save 10%</span></span>
+      <ul><li>2 Months — 61 days</li><li>240 AI credits</li><li>All features included</li></ul>
+      <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    </div>
+    <div class="price">
+      <h3>ENTERPRISE</h3>
+      <span class="was">$899</span>
+      <span class="amount">$809</span>
+      <span class="perday">$8.89/day <span class="save">· save 12%</span></span>
+      <ul><li>3 Months — 91 days</li><li>360 AI credits</li><li>All features included</li></ul>
+      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    </div>
+  </div>
+  <p class="pay-note">All plans include the same complete feature set · payment via crypto · key issued in Telegram on payment.</p>
+</section>
+
+<section id="faq" class="wrap faq">
+  <div class="sec-head"><h2>Frequently asked</h2></div>
+  <details><summary>How do I get access?</summary><p>Hit <strong>GRAB KEY</strong> — it opens a Telegram chat. Message us which plan you want, pay by crypto, and your access key + installer come straight back in the chat.</p></details>
+  <details><summary>What send accounts are supported?</summary><p>15 methods: SMTP relay (any server), Direct-to-MX, open relay, HTTP/SOCKS proxies, Microsoft Graph (app + delegated), Gmail API, MS refresh-token mailboxes, M365 client-credential tenants, plus SendGrid, AWS SES, Mailgun, Postmark, Brevo, SparkPost, Elastic Email and Mandrill via API presets. All support rotation, failover, quotas and custom headers.</p></details>
+  <details><summary>Where does my data live?</summary><p>On your machine — contacts, drafts, credentials and logs are stored locally in an encrypted database and never uploaded. Credentials are AES-256-GCM encrypted at rest.</p></details>
+  <details><summary>How does the mailbox pool work?</summary><p>Import Microsoft RT tokens or app credentials — each mailbox sends as itself through the rotation, with its own daily quota, cooldowns and failover. Dead mailboxes drop out automatically after verification.</p></details>
+  <details><summary>What is RBC Helper?</summary><p>A built-in AI assistant docked beside every screen. It sees your live sender state — can rewrite your letter, diagnose failures, verify accounts, pause queues and navigate for you, with a model picker and automatic provider failover.</p></details>
+</section>
+
+<section class="final wrap">
+  <h2 style="color:#eafff0;font-size:clamp(19px,3vw,26px);margin-bottom:14px;">Ready to run your own infrastructure?</h2>
+  <p class="dim-txt" style="color:var(--dim);font-size:13px;margin-bottom:28px;">Local data, AES-256 encryption, 15 engines, AI assistant — one key unlocks it all.</p>
+  <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY — MESSAGE ON TELEGRAM</a>
+</section>
+
+<footer class="wrap">
+  <span>RBC SENDER — self-hosted email platform</span>
+  <span>Your data never leaves your machine.</span>
+</footer>
+</body>
+</html>
