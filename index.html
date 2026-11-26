@@ -152,12 +152,24 @@
   .faq details p { color:var(--soft); font-size:12px; line-height:1.8; margin-top:10px; }
   .faq code, .faq strong { color:var(--green-bright); }
   /* final */
-  .final { text-align:center; padding-bottom:100px; }
-  .final h2 { color:var(--txt); font-size:clamp(20px,3vw,28px); margin-bottom:14px; font-weight:800; }
-  .final h2::before { content:'[ '; color:var(--green-dim); }
-  .final h2::after { content:' ]'; color:var(--green-dim); }
-  .final p { color:var(--faint); font-size:13px; margin-bottom:32px; }
-  footer { border-top:1px solid var(--line); padding:24px 0 38px; display:flex; justify-content:space-between; color:var(--faint); font-size:11px; flex-wrap:wrap; gap:8px; }
+  .included { margin-top:44px; border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:26px 28px; }
+  .included h4 { margin:0 0 18px; font-size:13px; letter-spacing:2.5px; color:var(--txt); text-transform:uppercase; }
+  .inc-grid { display:flex; flex-wrap:wrap; gap:8px; }
+  .inc-grid span { border:1px solid var(--line); border-radius:4px; padding:6px 12px; font-size:10.5px; letter-spacing:1.2px; color:var(--soft); background:rgba(47,224,107,.03); }
+  .inc-grid span::before { content:'✓ '; color:var(--green); font-weight:800; }
+  .final { padding-bottom:100px; }
+  .final-box { border:1px solid var(--line-bright); border-radius:10px; background:linear-gradient(135deg,rgba(47,224,107,.07),var(--panel) 60%); padding:56px 40px; text-align:center; box-shadow:0 20px 80px rgba(0,0,0,.45), inset 0 0 60px rgba(47,224,107,.04); }
+  .final-box h2 { color:var(--txt); font-size:clamp(22px,3.2vw,30px); margin-bottom:14px; font-weight:800; }
+  .final-box p { color:var(--soft); font-size:13px; margin:0 auto 32px; max-width:600px; line-height:1.8; }
+  footer { border-top:1px solid var(--line); padding:48px 0 30px; }
+  .fgrid { display:grid; grid-template-columns:2.2fr 1fr 1fr 1fr; gap:36px; margin-bottom:36px; }
+  .fcol h5 { margin:0 0 14px; font-size:10px; letter-spacing:2.5px; color:var(--faint); font-weight:700; }
+  .fcol a { display:block; color:var(--soft); font-size:12px; margin-bottom:9px; }
+  .fcol a:hover { color:var(--green-bright); }
+  .fbrand .logo { font-size:17px; font-weight:800; letter-spacing:1px; margin-bottom:12px; }
+  .fbrand .logo em { font-style:normal; color:var(--green); font-size:10px; letter-spacing:2px; margin-left:8px; vertical-align:middle; }
+  .fbrand p { color:var(--faint); font-size:11.5px; line-height:1.7; max-width:340px; margin:0; }
+  .fbottom { border-top:1px solid var(--line); padding-top:22px; display:flex; justify-content:space-between; color:var(--faint); font-size:11px; flex-wrap:wrap; gap:8px; }
   /* media showcase */
   .shot-hero { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel); box-shadow:0 24px 80px rgba(0,0,0,.5), 0 0 40px rgba(47,224,107,.06); }
   .shot-hero .bar { display:flex; gap:7px; padding:10px 14px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.02); }
@@ -183,7 +195,7 @@
   /* smart scroll — sections snap to their headings */
   html { scroll-snap-type:y proximity; scroll-padding-top:70px; }
   .hero, section, footer { scroll-snap-align:start; }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .steps { grid-template-columns:1fr; } }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .steps { grid-template-columns:1fr; } .fgrid { grid-template-columns:1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -353,6 +365,12 @@
     </div>
   </div>
   <p class="pay-note">All plans include the complete feature set · payment via crypto · key delivered on WhatsApp on payment.</p>
+  <div class="included">
+    <h4>Everything included, every plan</h4>
+    <div class="inc-grid">
+      <span>15 Send Engines</span><span>Rubicon AI Co-Pilot</span><span>AI Letter Engine</span><span>Spam Checker + AI Fixer</span><span>Visual Email Builder</span><span>Smart List Sorter</span><span>Live Send Console</span><span>Anti-Fingerprint Engine</span><span>Mailbox Pool Rotation</span><span>Letter Vault — 73 Templates</span><span>Image Reprocessing</span><span>80+ Merge Tags</span><span>Beast-Mode Parallel Send</span><span>MS RT + App-Cred Import</span><span>Proxy Support</span><span>DKIM Signing</span><span>AES-256-GCM Encryption</span><span>A/B Subject Testing</span><span>Attachment Conversion</span><span>Custom Headers</span><span>CC / BCC Support</span><span>Bounce Suppression</span><span>Encrypted Local Vault</span><span>Quota + Cooldown Engine</span><span>One-Click Updates</span>
+    </div>
+  </div>
 </section>
 
 <section id="faq" class="wrap faq">
@@ -365,15 +383,41 @@
 </section>
 
 <section class="final wrap">
-  <h2>The wire doesn't rent itself.</h2>
-  <p>Local data, AES-256 encryption, fifteen engines, an AI co-pilot — one key unlocks the suite.</p>
-  <a class="btn btn-solid" href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20want%20a%20Rubicon%20Email%20Suite%20key.%20Ready%20when%20you%20are." target="_blank" rel="noopener">GRAB KEY — MESSAGE ON WHATSAPP</a>
+  <div class="final-box">
+    <h2>Ready to own your sending operation?</h2>
+    <p>100% local data, AES-256 encryption, fifteen send engines and an AI co-pilot — all in one desktop application. One key unlocks the suite.</p>
+    <a class="btn btn-solid" href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20want%20a%20Rubicon%20Email%20Suite%20key.%20Ready%20when%20you%20are." target="_blank" rel="noopener">GET RUBICON EMAIL SUITE</a>
+  </div>
 </section>
 
 <footer class="wrap">
-  <span>RUBICON EMAIL SUITE — self-hosted sending, on your machine</span>
-  <span>Your data never leaves your box.</span>
-  <span class="copy">© 2026 Rubicon Email Suite. All rights reserved.</span>
+  <div class="fgrid">
+    <div class="fcol fbrand">
+      <div class="logo">RUBICON<em>EMAIL SUITE</em></div>
+      <p>Self-hosted desktop email sending platform — 15 send engines, AI-powered tools, and military-grade encryption. Your data stays on your machine.</p>
+    </div>
+    <div class="fcol">
+      <h5>PRODUCT</h5>
+      <a href="#features">Features</a>
+      <a href="#engines">Send Engines</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="fcol">
+      <h5>LEGAL</h5>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="fcol">
+      <h5>SUPPORT</h5>
+      <a href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20need%20help%20with%20Rubicon%20Email%20Suite." target="_blank" rel="noopener">WhatsApp Support</a>
+      <a href="https://t.me/fuckmonad" target="_blank" rel="noopener">Telegram — @fuckmonad</a>
+    </div>
+  </div>
+  <div class="fbottom">
+    <span>© 2026 Rubicon Email Suite. All rights reserved.</span>
+    <span>Self-Hosted Desktop Email Sending Platform</span>
+  </div>
 </footer>
 
 <script>
