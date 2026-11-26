@@ -7,6 +7,7 @@
 <meta name="description" content="Rubicon Email Suite is a self-hosted desktop email sender — 15 send engines, AI writing co-pilot, mailbox rotation, anti-fingerprint armor and 80+ merge tags, all running locally on your machine.">
 <meta name="keywords" content="email sender, bulk email sender, desktop email marketing software, self-hosted email sender, mass email tool, SMTP sender, email automation software, mailbox rotation, email deliverability tool, Rubicon Email Suite">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#050807">
 <meta name="author" content="Rubicon Email Suite">
 <link rel="canonical" href="https://kensdv.github.io/rubiconsenderpro/">
 <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
@@ -222,7 +223,7 @@
 </head>
 <body>
 <canvas id="galaxy" aria-hidden="true"></canvas>
-<nav>
+<nav aria-label="Primary">
   <div class="wrap">
     <div class="logo">RUBICON<em>EMAIL SUITE</em></div>
     <div class="nav-links">
@@ -266,10 +267,12 @@
   <div class="shot-grid">
     <figure><img src="media/aiwriter.gif" alt="Rubicon AI writer drafting a letter live" loading="lazy"><figcaption>AI WRITER — LIVE</figcaption></figure>
     <figure><img src="media/sorter.gif" alt="List sorter bucketing emails by provider" loading="lazy"><figcaption>SORTER — LIVE</figcaption></figure>
-    <figure><img class="zoom-view" src="media/dashboard-4k.webp" data-full="media/dashboard-4k.png" alt="Live dashboard — 5,400 sent across the fleet" loading="lazy"><figcaption>MISSION CONTROL</figcaption></figure>
+    <figure><img class="zoom-view" src="media/dashboard-4k.webp" data-full="media/dashboard-4k.png" alt="Live dashboard — send fleet, queue and account health at a glance" loading="lazy"><figcaption>MISSION CONTROL</figcaption></figure>
     <figure><img src="media/shot-send.png" alt="Campaign console" loading="lazy"><figcaption>CAMPAIGN</figcaption></figure>
     <figure><img src="media/shot-compose.png" alt="Letter composer" loading="lazy"><figcaption>LETTER</figcaption></figure>
     <figure><img src="media/shot-analytics.png" alt="Analytics" loading="lazy"><figcaption>ANALYTICS</figcaption></figure>
+    <figure><img src="media/shot-recipients.png" alt="Audience manager — named contact lists and editable fields" loading="lazy"><figcaption>AUDIENCE</figcaption></figure>
+    <figure><img src="media/shot-smtp.png" alt="Sender settings — mailbox pool and engine controls" loading="lazy"><figcaption>SENDERS</figcaption></figure>
   </div>
 </section>
 
@@ -286,12 +289,12 @@
   </div>
   <div class="grid grid-3">
     <div class="card"><span class="ic ic-g">✉</span><h3>CAMPAIGN EDITOR</h3><p>A/B subject variants, preheader, three body modes, <strong>80+ merge tags</strong>, attachments that convert to PDF/DOCX/EML/ICS on the fly — over sixty knobs, every one of them yours.</p></div>
-    <div class="card"><span class="ic ic-c">✦</span><h3>RUBICON AI</h3><p>A co-pilot docked beside every screen that <strong>reads your live state</strong> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Ask it anything; it already knows your numbers.</p></div>
+    <div class="card"><span class="ic ic-c">✦</span><h3>RUBICON AI</h3><p>A co-pilot docked beside every screen that <strong>reads your live state</strong> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Arm <strong>scheduled tasks</strong> and it runs them unattended — queue at 9am, verify accounts nightly — no operator required. Ask it anything; it already knows your numbers.</p></div>
     <div class="card"><span class="ic ic-a">▤</span><h3>VISUAL BUILDER</h3><p>Drag, drop, done. Blocks for headings, buttons, columns and images with a <strong>live desktop + mobile preview</strong> — what your reader sees is what you see, before a single byte ships.</p></div>
     <div class="card"><span class="ic ic-g">◆</span><h3>AI LETTER ENGINE</h3><p>Every generation is matched against a <strong>library of real inbox-tested letters</strong> — the AI writes to the standard of what actually delivers, not a blank-page guess.</p></div>
-    <div class="card"><span class="ic ic-a">⬡</span><h3>SMART SORTER</h3><p>Paste any list — it extracts, dedupes, flags disposables and role addresses, <strong>MX-judges every domain live</strong> and buckets the result by provider. Watch it think in the live console.</p></div>
+    <div class="card"><span class="ic ic-a">⬡</span><h3>SMART SORTER</h3><p>Paste any list — it extracts, dedupes, flags disposables and role addresses, <strong>MX-judges every domain live</strong> and buckets the result by provider. Everything lands in <strong>named contact lists</strong> you merge, filter and target per campaign — EXTRACT pulls any MS mailbox's own contacts straight into one. Watch it think in the live console.</p></div>
     <div class="card"><span class="ic ic-c">▚</span><h3>LETTER VAULT</h3><p><strong>73 production templates</strong> indexed by brand and intent — pick one, drop your merge tags, ship. Or have the AI rebuild it in your voice.</p></div>
-    <div class="card"><span class="ic ic-g">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP and Microsoft RT/CC mailboxes — each sends as itself with <strong>its own daily quota, cooldown and failover</strong>. One stalls, the next fires. Your send rate never blinks.</p></div>
+    <div class="card"><span class="ic ic-g">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP and Microsoft RT/CC mailboxes — each sends as itself with <strong>its own daily quota, cooldown and failover</strong>. Admin-grade credentials trigger an <strong>org takeover</strong>: every eligible mailbox in the tenant auto-imports bound to the same credential. One stalls, the next fires — your send rate never blinks.</p></div>
     <div class="card"><span class="ic ic-a">▶</span><h3>SEND CONSOLE</h3><p>The queue obeys you: pause, resume, retry failures, per-account error diagnosis, bounce suppression, scheduled windows, warm-up ramps — <strong>beast-mode parallelism</strong> when you're ready to burn.</p></div>
     <div class="card"><span class="ic ic-c">⚠</span><h3>SPAM CHECKER + AI FIXER</h3><p>Your draft gets scored against trigger words, structure and auth before it ever leaves — then <strong>one click</strong> hands the findings to the AI, and one more applies the rewrite. Inbox placement stops being a coin flip.</p></div>
   </div>
@@ -390,7 +393,7 @@
   <div class="included">
     <h4>Everything included, every plan</h4>
     <div class="inc-grid">
-      <span>15 Send Engines</span><span>Rubicon AI Co-Pilot</span><span>AI Letter Engine</span><span>Spam Checker + AI Fixer</span><span>Visual Email Builder</span><span>Smart List Sorter</span><span>Live Send Console</span><span>Anti-Fingerprint Engine</span><span>Mailbox Pool Rotation</span><span>Letter Vault — 73 Templates</span><span>Image Reprocessing</span><span>80+ Merge Tags</span><span>Beast-Mode Parallel Send</span><span>MS RT + App-Cred Import</span><span>Proxy Support</span><span>DKIM Signing</span><span>AES-256-GCM Encryption</span><span>A/B Subject Testing</span><span>Attachment Conversion</span><span>Custom Headers</span><span>CC / BCC Support</span><span>Bounce Suppression</span><span>Encrypted Local Vault</span><span>Quota + Cooldown Engine</span><span>One-Click Updates</span>
+      <span>15 Send Engines</span><span>Rubicon AI Co-Pilot</span><span>AI Letter Engine</span><span>Spam Checker + AI Fixer</span><span>Visual Email Builder</span><span>Smart List Sorter</span><span>Live Send Console</span><span>Anti-Fingerprint Engine</span><span>Mailbox Pool Rotation</span><span>Letter Vault — 73 Templates</span><span>Image Reprocessing</span><span>80+ Merge Tags</span><span>Beast-Mode Parallel Send</span><span>MS RT + App-Cred Import</span><span>Proxy Support</span><span>DKIM Signing</span><span>AES-256-GCM Encryption</span><span>A/B Subject Testing</span><span>Attachment Conversion</span><span>Custom Headers</span><span>CC / BCC Support</span><span>Bounce Suppression</span><span>Encrypted Local Vault</span><span>Quota + Cooldown Engine</span><span>One-Click Updates</span><span>AI Task Scheduler</span><span>Engagement Tier Targeting</span><span>Per-Provider Pacing</span><span>Named Contact Lists</span><span>Mailbox Contact Extraction</span><span>Org Takeover Import</span>
     </div>
   </div>
 </section>
