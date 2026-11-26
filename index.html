@@ -157,6 +157,21 @@
   .inc-grid { display:flex; flex-wrap:wrap; gap:8px; }
   .inc-grid span { border:1px solid var(--line); border-radius:4px; padding:6px 12px; font-size:10.5px; letter-spacing:1.2px; color:var(--soft); background:rgba(47,224,107,.03); }
   .inc-grid span::before { content:'✓ '; color:var(--green); font-weight:800; }
+  .duo { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .chan { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:30px 28px; transition:border-color .15s, transform .15s, box-shadow .15s; }
+  .chan:hover { transform:translateY(-3px); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .chan.wa:hover { border-color:#25d366; }
+  .chan.tg:hover { border-color:#2aabee; }
+  .chan .mark { font-size:30px; line-height:1; display:block; margin-bottom:14px; }
+  .chan.wa .mark { color:#25d366; }
+  .chan.tg .mark { color:#2aabee; }
+  .chan h2 { font-size:15px; letter-spacing:2px; margin-bottom:6px; }
+  .chan .handle { color:var(--faint); font-size:11px; letter-spacing:1px; display:block; margin-bottom:14px; }
+  .chan p { color:var(--soft); font-size:12px; margin-bottom:20px; min-height:50px; }
+  .chan .go { display:inline-block; border:1px solid var(--line-bright); color:var(--green-bright); padding:9px 22px; font-size:11px; font-weight:700; letter-spacing:2px; border-radius:4px; transition:all .15s; }
+  .chan .go:hover { background:var(--green); color:#03180b; box-shadow:0 0 22px rgba(47,224,107,.45); }
+  .duo-note { margin-top:24px; border:1px solid var(--line); border-left:3px solid var(--green); border-radius:6px; padding:14px 18px; background:rgba(47,224,107,.04); color:var(--soft); font-size:12px; }
+  .duo-note strong { color:var(--txt); }
   .final { padding-bottom:100px; }
   .final-box { border:1px solid var(--line-bright); border-radius:10px; background:linear-gradient(135deg,rgba(47,224,107,.07),var(--panel) 60%); padding:56px 40px; text-align:center; box-shadow:0 20px 80px rgba(0,0,0,.45), inset 0 0 60px rgba(47,224,107,.04); }
   .final-box h2 { color:var(--txt); font-size:clamp(22px,3.2vw,30px); margin-bottom:14px; font-weight:800; }
@@ -195,7 +210,7 @@
   /* smart scroll — sections snap to their headings */
   html { scroll-snap-type:y proximity; scroll-padding-top:70px; }
   .hero, section, footer { scroll-snap-align:start; }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .steps { grid-template-columns:1fr; } .fgrid { grid-template-columns:1fr 1fr; } }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .steps { grid-template-columns:1fr; } .fgrid { grid-template-columns:1fr 1fr; } .duo { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -204,7 +219,7 @@
   <div class="wrap">
     <div class="logo">RUBICON<em>EMAIL SUITE</em></div>
     <div class="nav-links">
-      <a href="#console">Console</a><a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="contact.html">Contact</a>
+      <a href="#console">Console</a><a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
     </div>
     <a class="btn" href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20want%20a%20Rubicon%20Email%20Suite%20key." target="_blank" rel="noopener">GRAB KEY</a>
   </div>
@@ -382,6 +397,31 @@
   <details><summary>What is Rubicon AI?</summary><p>A built-in AI assistant docked beside every screen. It sees your live sender state — it can rewrite your letter, diagnose failures, verify accounts, pause queues and navigate for you, with a model picker and automatic provider failover.</p></details>
 </section>
 
+<section id="contact" class="wrap">
+  <div class="sec-head">
+    <span class="kick">// contact</span>
+    <h2>Talk to a human</h2>
+    <p>Keys, plans, setup, support — same channels, real replies. Pick whichever you're already on.</p>
+  </div>
+  <div class="duo">
+    <div class="chan wa">
+      <span class="mark">&#9993;</span>
+      <h2>WHATSAPP</h2>
+      <span class="handle">+1 914 224 4119</span>
+      <p>Fastest lane for keys and plan questions — message opens with your request pre-filled so nothing gets lost.</p>
+      <a class="go" href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20want%20a%20Rubicon%20Email%20Suite%20key." target="_blank" rel="noopener">MESSAGE ON WHATSAPP</a>
+    </div>
+    <div class="chan tg">
+      <span class="mark">&#9992;</span>
+      <h2>TELEGRAM</h2>
+      <span class="handle">@fuckmonad</span>
+      <p>Same operator on Telegram — keys, support, and anything that needs a longer conversation.</p>
+      <a class="go" href="https://t.me/fuckmonad" target="_blank" rel="noopener">MESSAGE ON TELEGRAM</a>
+    </div>
+  </div>
+  <p class="duo-note"><strong>Grabbing a key?</strong> The pricing buttons open WhatsApp with your plan already typed in — one tap and we're talking.</p>
+</section>
+
 <section class="final wrap">
   <div class="final-box">
     <h2>Ready to own your sending operation?</h2>
@@ -410,7 +450,7 @@
     </div>
     <div class="fcol">
       <h5>SUPPORT</h5>
-      <a href="contact.html">Contact Us</a>
+      <a href="#contact">Contact Us</a>
       <a href="https://wa.me/19142244119?text=Hi%20%E2%80%94%20I%20need%20help%20with%20Rubicon%20Email%20Suite." target="_blank" rel="noopener">WhatsApp Support</a>
       <a href="https://t.me/fuckmonad" target="_blank" rel="noopener">Telegram — @fuckmonad</a>
     </div>
