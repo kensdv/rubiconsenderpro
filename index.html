@@ -151,27 +151,10 @@
   @keyframes tick { to { transform:translateX(-50%); } }
   .ticker span { font-size:11px; font-weight:700; letter-spacing:2.5px; color:var(--green); padding:0 34px; text-shadow:0 0 14px rgba(47,224,107,.45); }
   .ticker span i { font-style:normal; color:var(--amber); margin-right:12px; }
-  /* smart collage */
-  .collage-feature { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel); box-shadow:0 24px 80px rgba(0,0,0,.5), 0 0 40px rgba(47,224,107,.06); position:relative; }
-  .collage-feature .bar { display:flex; gap:7px; padding:10px 14px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.02); }
-  .collage-feature .bar i { width:9px; height:9px; border-radius:50%; background:var(--line); display:block; }
-  .collage-feature .bar i:first-child { background:var(--green); box-shadow:0 0 8px rgba(47,224,107,.6); }
-  .collage-feature .bar b { margin-left:auto; font-size:9px; letter-spacing:2.5px; color:var(--faint); font-weight:400; align-self:center; }
-  .collage-frame { position:relative; aspect-ratio:16/9; overflow:hidden; }
-  .collage-frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease; animation:kb 9s ease-in-out infinite alternate; cursor:zoom-in; }
-  .collage-frame img.on { opacity:1; }
-  @keyframes kb { from { transform:scale(1); } to { transform:scale(1.055); } }
-  .feature-tag { position:absolute; left:14px; bottom:12px; z-index:3; background:rgba(4,8,5,.82); border:1px solid var(--line-bright); color:var(--green-bright); font-size:10px; font-weight:800; letter-spacing:2px; padding:5px 12px; border-radius:3px; backdrop-filter:blur(6px); }
-  .feature-hint { position:absolute; right:14px; bottom:12px; z-index:3; background:var(--green); color:#03180b; font-size:9px; font-weight:800; letter-spacing:1.5px; padding:5px 11px; border-radius:3px; box-shadow:0 0 18px rgba(47,224,107,.5); animation:hintPulse 1.8s ease-in-out infinite; }
-  @keyframes hintPulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.75; transform:scale(.96); } }
-  .collage-film { display:flex; gap:10px; margin-top:12px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin; }
-  .film-thumb { flex:0 0 auto; width:158px; border:1px solid var(--line); border-radius:5px; overflow:hidden; background:var(--panel); cursor:pointer; transition:border-color .15s, transform .15s; padding:0; }
-  .film-thumb:hover { border-color:var(--line-bright); transform:translateY(-2px); }
-  .film-thumb.on { border-color:var(--green); box-shadow:0 0 16px rgba(47,224,107,.3); }
-  .film-thumb img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
-  .film-thumb i { display:block; font-style:normal; font-size:8px; letter-spacing:1.8px; color:var(--faint); padding:5px 8px; text-align:center; }
-  .film-thumb.on i { color:var(--green); }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .film-thumb { width:118px; } .feature-hint { display:none; } }
+  /* smart scroll — sections snap to their headings */
+  html { scroll-snap-type:y proximity; scroll-padding-top:70px; }
+  .hero, section, footer { scroll-snap-align:start; }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -212,15 +195,18 @@
     <p>Not mockups. Captured from a running Rubicon instance — the same screen you'll own the wire from.</p>
   </div>
   <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
-  <div class="collage-feature">
-    <div class="bar"><i></i><i></i><i></i><b>LIVE CONSOLE — RUBICON.APP</b></div>
-    <div class="collage-frame">
-      <img id="featImg" src="media/walkthrough.gif" alt="Rubicon Email Suite — live console">
-      <span class="feature-tag" id="featTag">WALKTHROUGH — LIVE</span>
-      <span class="feature-hint">CLICK TO ZOOM</span>
-    </div>
+  <div class="shot-hero">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <img src="media/walkthrough.gif" alt="Rubicon Email Suite — live dashboard walkthrough" loading="lazy">
   </div>
-  <div class="collage-film" id="filmStrip"></div>
+  <div class="shot-grid">
+    <figure><img src="media/aiwriter.gif" alt="Rubicon AI writer drafting a letter live" loading="lazy"><figcaption>AI WRITER — LIVE</figcaption></figure>
+    <figure><img src="media/sorter.gif" alt="List sorter bucketing emails by provider" loading="lazy"><figcaption>SORTER — LIVE</figcaption></figure>
+    <figure><img src="media/dashboard-4k.webp" data-full="media/dashboard-4k.png" alt="Live dashboard — 5,400 sent across the fleet" loading="lazy"><figcaption>MISSION CONTROL</figcaption></figure>
+    <figure><img src="media/shot-send.png" alt="Campaign console" loading="lazy"><figcaption>CAMPAIGN</figcaption></figure>
+    <figure><img src="media/shot-compose.png" alt="Letter composer" loading="lazy"><figcaption>LETTER</figcaption></figure>
+    <figure><img src="media/shot-analytics.png" alt="Analytics" loading="lazy"><figcaption>ANALYTICS</figcaption></figure>
+  </div>
 </section>
 
 <section id="features" class="wrap">
@@ -430,7 +416,7 @@
   const close = () => { lb.style.display = 'none'; img.src = ''; document.body.style.overflow = ''; };
   lb.addEventListener('click', close);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-  document.querySelectorAll('.collage-frame img, .shot-hero img, .shot-grid img').forEach((el) => {
+  document.querySelectorAll('.shot-hero img, .shot-grid img').forEach((el) => {
     el.classList.add('zoomable');
     el.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -439,43 +425,6 @@
       document.body.style.overflow = 'hidden';
     });
   });
-})();
-
-// ── smart collage — auto-cycling featured frame + filmstrip ──
-(() => {
-  const SHOTS = [
-    { src: 'media/walkthrough.gif',    tag: 'WALKTHROUGH — LIVE' },
-    { src: 'media/dashboard-4k.webp',  tag: 'MISSION CONTROL', full: 'media/dashboard-4k.png' },
-    { src: 'media/aiwriter.gif',       tag: 'AI WRITER — LIVE' },
-    { src: 'media/sorter.gif',         tag: 'SORTER — LIVE' },
-    { src: 'media/shot-send.png',      tag: 'CAMPAIGN CONSOLE' },
-    { src: 'media/shot-compose.png',   tag: 'LETTER BUILDER' },
-    { src: 'media/shot-analytics.png', tag: 'ANALYTICS' },
-    { src: 'media/shot-smtp.png',      tag: 'MAILBOX POOL' },
-  ];
-  const feat = document.getElementById('featImg');
-  const tag = document.getElementById('featTag');
-  const film = document.getElementById('filmStrip');
-  if (!feat || !film) return;
-  let cur = 0, timer;
-  SHOTS.forEach((s, i) => {
-    const b = document.createElement('button');
-    b.className = 'film-thumb' + (i === 0 ? ' on' : '');
-    b.innerHTML = `<img src="${s.src}" alt="${s.tag}" loading="lazy"><i>${s.tag}</i>`;
-    b.addEventListener('click', () => { show(i); reset(); });
-    film.appendChild(b);
-  });
-  const thumbs = [...film.children];
-  function show(i) {
-    cur = i;
-    const s = SHOTS[i];
-    feat.classList.remove('on');
-    setTimeout(() => { feat.src = s.src; feat.dataset.full = s.full || ''; tag.textContent = s.tag; feat.classList.add('on'); }, 220);
-    thumbs.forEach((t, j) => t.classList.toggle('on', j === i));
-  }
-  function reset() { clearInterval(timer); timer = setInterval(() => show((cur + 1) % SHOTS.length), 4200); }
-  feat.classList.add('on');
-  reset();
 })();
 
 // ── stats ticker — numbers that make the blind look twice ──
