@@ -113,7 +113,18 @@
   .final h2::after { content:' ]'; color:var(--green-dim); }
   .final p { color:var(--faint); font-size:13px; margin-bottom:32px; }
   footer { border-top:1px solid var(--line); padding:24px 0 38px; display:flex; justify-content:space-between; color:var(--faint); font-size:11px; flex-wrap:wrap; gap:8px; }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } }
+  /* media showcase */
+  .shot-hero { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel); box-shadow:0 24px 80px rgba(0,0,0,.5), 0 0 40px rgba(47,224,107,.06); }
+  .shot-hero .bar { display:flex; gap:7px; padding:10px 14px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.02); }
+  .shot-hero .bar i { width:9px; height:9px; border-radius:50%; background:var(--line); display:block; }
+  .shot-hero .bar i:first-child { background:var(--green); box-shadow:0 0 8px rgba(47,224,107,.6); }
+  .shot-hero img { display:block; width:100%; }
+  .shot-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .shot-grid figure { border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--panel); transition:border-color .15s, transform .15s; }
+  .shot-grid figure:hover { border-color:var(--line-bright); transform:translateY(-2px); }
+  .shot-grid img { display:block; width:100%; }
+  .shot-grid figcaption { padding:7px 12px; font-size:10px; letter-spacing:2px; color:var(--faint); text-transform:uppercase; border-top:1px solid var(--line); }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -121,7 +132,7 @@
   <div class="wrap">
     <div class="logo">RUBICON<em>EMAIL SUITE</em></div>
     <div class="nav-links">
-      <a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+      <a href="#console">Console</a><a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
     </div>
     <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
   </div>
@@ -145,6 +156,26 @@
     <div class="stat"><b>AES-256</b><i>AT REST</i></div>
   </div>
 </header>
+
+<section id="console" class="wrap">
+  <div class="sec-head">
+    <span class="kick">// the console — live</span>
+    <h2>This is the actual cockpit</h2>
+    <p>Not mockups. Captured from a running Rubicon instance — the same screen you'll own the wire from.</p>
+  </div>
+  <div class="shot-hero">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <img src="media/walkthrough.gif" alt="Rubicon Email Suite — live dashboard walkthrough" loading="lazy">
+  </div>
+  <div class="shot-grid">
+    <figure><img src="media/shot-dashboard.png" alt="Dashboard" loading="lazy"><figcaption>DASHBOARD</figcaption></figure>
+    <figure><img src="media/shot-send.png" alt="Campaign console" loading="lazy"><figcaption>CAMPAIGN</figcaption></figure>
+    <figure><img src="media/shot-compose.png" alt="Letter composer" loading="lazy"><figcaption>LETTER</figcaption></figure>
+    <figure><img src="media/shot-sorter.png" alt="List sorter" loading="lazy"><figcaption>SORTER</figcaption></figure>
+    <figure><img src="media/shot-aiwriter.png" alt="AI writer" loading="lazy"><figcaption>AI WRITER</figcaption></figure>
+    <figure><img src="media/shot-analytics.png" alt="Analytics" loading="lazy"><figcaption>ANALYTICS</figcaption></figure>
+  </div>
+</section>
 
 <section id="features" class="wrap">
   <div class="sec-head">
