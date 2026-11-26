@@ -9,23 +9,38 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#050807">
 <meta name="author" content="Rubicon Email Suite">
-<link rel="canonical" href="https://kensdv.github.io/rubiconsenderpro/">
 <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
 <link rel="apple-touch-icon" href="media/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rubicon Email Suite">
 <meta property="og:title" content="Rubicon Email Suite — Self-Hosted Desktop Email Sender">
 <meta property="og:description" content="15 send engines, an AI co-pilot, mailbox rotation and anti-fingerprint armor — a complete sending operation on your machine. Zero cloud, zero middleman.">
-<meta property="og:url" content="https://kensdv.github.io/rubiconsenderpro/">
-<meta property="og:image" content="https://kensdv.github.io/rubiconsenderpro/media/twitter-card.png">
+<meta property="og:image" content="media/twitter-card.png">
 <meta property="og:image:width" content="3840">
 <meta property="og:image:height" content="2160">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Rubicon Email Suite — Self-Hosted Desktop Email Sender">
 <meta name="twitter:description" content="15 send engines, AI co-pilot, mailbox rotation, anti-fingerprint armor — a complete sending operation on your machine.">
-<meta name="twitter:image" content="https://kensdv.github.io/rubiconsenderpro/media/twitter-card.png">
+<meta name="twitter:image" content="media/twitter-card.png">
+<script>
+// resolve all origin-dependent URLs from whatever domain serves the page
+(() => {
+  const o = location.origin;
+  const set = (sel, attr, val) => { const el = document.head.querySelector(sel); if (el) el.setAttribute(attr, val); };
+  const link = document.createElement('link');
+  link.rel = 'canonical'; link.href = o + '/';
+  document.head.appendChild(link);
+  const og = document.createElement('meta');
+  og.setAttribute('property', 'og:url'); og.content = o + '/';
+  document.head.appendChild(og);
+  set('meta[property="og:image"]', 'content', o + '/media/twitter-card.png');
+  set('meta[name="twitter:image"]', 'content', o + '/media/twitter-card.png');
+  const ld = document.head.querySelector('script[type="application/ld+json"]');
+  if (ld) ld.textContent = ld.textContent.replace('__ORIGIN__', o);
+})();
+</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rubicon Email Suite","applicationCategory":"BusinessApplication","operatingSystem":"Windows","description":"Self-hosted desktop email sender with 15 send engines, AI co-pilot, mailbox rotation and anti-fingerprint armor.","url":"https://kensdv.github.io/rubiconsenderpro/","offers":{"@type":"Offer","price":"50","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rubicon Email Suite","applicationCategory":"BusinessApplication","operatingSystem":"Windows","description":"Self-hosted desktop email sender with 15 send engines, AI co-pilot, mailbox rotation and anti-fingerprint armor.","url":"__ORIGIN__/","offers":{"@type":"Offer","price":"50","priceCurrency":"USD"}}
 </script>
 <style>
   :root {
