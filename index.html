@@ -80,6 +80,11 @@
   .sec-head p { color:var(--faint); font-size:13px; max-width:660px; margin:0 auto; line-height:1.8; }
   .grid { display:grid; gap:16px; }
   .grid-3 { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:36px; }
+  .step { border:1px solid var(--line); border-left:3px solid var(--green); border-radius:6px; padding:18px 20px; background:linear-gradient(135deg,rgba(47,224,107,.05),transparent 60%); }
+  .step b { display:block; font-size:26px; color:var(--green); letter-spacing:2px; margin-bottom:8px; }
+  .step h4 { margin:0 0 6px; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--txt); }
+  .step p { margin:0; font-size:12px; color:var(--soft); line-height:1.55; }
   .grid-5 { grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); }
   .card { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:24px 20px; transition:border-color .15s, box-shadow .15s, transform .15s; position:relative; }
   .card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--line-bright), transparent); opacity:0; transition:opacity .15s; }
@@ -154,7 +159,7 @@
   /* smart scroll — sections snap to their headings */
   html { scroll-snap-type:y proximity; scroll-padding-top:70px; }
   .hero, section, footer { scroll-snap-align:start; }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } .shot-grid { grid-template-columns:1fr 1fr; } .steps { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -216,10 +221,18 @@
     <h2>Every inch of the send — handled</h2>
     <p>Most senders hand you a compose box and a pray button. Rubicon hands you a console — write, arm, fire, watch it land.</p>
   </div>
+  <div class="steps">
+    <div class="step"><b>01</b><h4>Import your mailboxes</h4><p>Paste RT tokens, app creds or SMTP lines — one per line, any format, bulk files welcome.</p></div>
+    <div class="step"><b>02</b><h4>Arm your letter</h4><p>Write it, build it visually, or let Rubicon AI draft it — then send it through the checker.</p></div>
+    <div class="step"><b>03</b><h4>Watch it land</h4><p>Live console streams every send — rotation, failover and retries handled without you.</p></div>
+  </div>
   <div class="grid grid-3">
     <div class="card"><span class="ic ic-g">✉</span><h3>CAMPAIGN EDITOR</h3><p>A/B subject variants, preheader, three body modes, <strong>80+ merge tags</strong>, attachments that convert to PDF/DOCX/EML/ICS on the fly — over sixty knobs, every one of them yours.</p></div>
-    <div class="card"><span class="ic ic-c">✦</span><h3>RBC HELPER AI</h3><p>A co-pilot docked beside every screen that <strong>reads your live state</strong> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Ask it anything; it already knows your numbers.</p></div>
+    <div class="card"><span class="ic ic-c">✦</span><h3>RUBICON AI</h3><p>A co-pilot docked beside every screen that <strong>reads your live state</strong> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Ask it anything; it already knows your numbers.</p></div>
     <div class="card"><span class="ic ic-a">▤</span><h3>VISUAL BUILDER</h3><p>Drag, drop, done. Blocks for headings, buttons, columns and images with a <strong>live desktop + mobile preview</strong> — what your reader sees is what you see, before a single byte ships.</p></div>
+    <div class="card"><span class="ic ic-g">◆</span><h3>AI LETTER ENGINE</h3><p>Every generation is matched against a <strong>library of real inbox-tested letters</strong> — the AI writes to the standard of what actually delivers, not a blank-page guess.</p></div>
+    <div class="card"><span class="ic ic-a">⬡</span><h3>SMART SORTER</h3><p>Paste any list — it extracts, dedupes, flags disposables and role addresses, <strong>MX-judges every domain live</strong> and buckets the result by provider. Watch it think in the live console.</p></div>
+    <div class="card"><span class="ic ic-c">▚</span><h3>LETTER VAULT</h3><p><strong>73 production templates</strong> indexed by brand and intent — pick one, drop your merge tags, ship. Or have the AI rebuild it in your voice.</p></div>
     <div class="card"><span class="ic ic-g">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP and Microsoft RT/CC mailboxes — each sends as itself with <strong>its own daily quota, cooldown and failover</strong>. One stalls, the next fires. Your send rate never blinks.</p></div>
     <div class="card"><span class="ic ic-a">▶</span><h3>SEND CONSOLE</h3><p>The queue obeys you: pause, resume, retry failures, per-account error diagnosis, bounce suppression, scheduled windows, warm-up ramps — <strong>beast-mode parallelism</strong> when you're ready to burn.</p></div>
     <div class="card"><span class="ic ic-c">⚠</span><h3>SPAM CHECKER + AI FIXER</h3><p>Your draft gets scored against trigger words, structure and auth before it ever leaves — then <strong>one click</strong> hands the findings to the AI, and one more applies the rewrite. Inbox placement stops being a coin flip.</p></div>
@@ -269,7 +282,7 @@
 <section id="pricing" class="wrap">
   <div class="sec-head">
     <span class="kick">// priced to move</span>
-    <h2>Every feature. Every plan. 10% under Titan.</h2>
+    <h2>Every feature. Every plan. One fair price.</h2>
     <p>No tiers of features to upsell you later — duration is the only difference.</p>
   </div>
   <div class="price-grid">
@@ -324,7 +337,7 @@
   <details><summary>What send accounts are supported?</summary><p>Fifteen methods: SMTP relay (any server), Direct-to-MX, open relay, HTTP/SOCKS proxies, Microsoft Graph (app + delegated), Gmail API, MS refresh-token mailboxes, M365 client-credential tenants, plus SendGrid, AWS SES, Mailgun, Postmark, Brevo, SparkPost, Elastic Email and Mandrill via engine presets — or any HTTPS endpoint via the custom preset. All support rotation, failover, quotas and custom headers.</p></details>
   <details><summary>Where does my data live?</summary><p>On your machine — contacts, drafts, credentials and logs are stored locally in an encrypted database and never uploaded anywhere. Credentials are AES-256-GCM encrypted at rest.</p></details>
   <details><summary>How does the mailbox pool work?</summary><p>Import Microsoft RT tokens or app credentials — each mailbox sends as itself through the rotation, with its own daily quota, cooldowns and failover. Dead mailboxes drop out automatically after verification.</p></details>
-  <details><summary>What is RBC Helper?</summary><p>A built-in AI assistant docked beside every screen. It sees your live sender state — it can rewrite your letter, diagnose failures, verify accounts, pause queues and navigate for you, with a model picker and automatic provider failover.</p></details>
+  <details><summary>What is Rubicon AI?</summary><p>A built-in AI assistant docked beside every screen. It sees your live sender state — it can rewrite your letter, diagnose failures, verify accounts, pause queues and navigate for you, with a model picker and automatic provider failover.</p></details>
 </section>
 
 <section class="final wrap">
