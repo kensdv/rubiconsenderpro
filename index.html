@@ -6,96 +6,114 @@
 <title>Rubicon Email Suite — Own the Wire</title>
 <style>
   :root {
-    --ink:#0c1220; --ink-soft:#3d4756; --ink-faint:#6b7688;
-    --paper:#fafbfc; --panel:#ffffff; --line:#e2e6ee;
-    --green:#0a7a3f; --green-deep:#065c2e; --green-tint:#e8f6ee;
-    --amber:#b45309; --amber-tint:#fdf2e3;
-    --cyan:#0e7490; --cyan-tint:#e6f7fb;
-    --mono:ui-monospace,'Cascadia Code','Courier New',monospace;
-    --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+    --bg:#050807; --panel:#0a120c; --panel2:#0d1710;
+    --line:#1d3325; --line-bright:#2fae5c;
+    --green:#2fe06b; --green-bright:#4dff8a; --green-dim:#1a8a46;
+    --amber:#f5a623; --cyan:#3fd4e8;
+    --txt:#e8f5ec; --soft:#9fb8a8; --faint:#5f7a68;
+    --mono:ui-monospace,'Cascadia Code','Cascadia Mono','JetBrains Mono','Courier New',monospace;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--paper); color:var(--ink); font-family:var(--sans); overflow-x:hidden; line-height:1.6; }
-  body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 60% 35% at 50% -5%, rgba(10,122,63,.08), transparent 60%), radial-gradient(ellipse 35% 25% at 90% 95%, rgba(14,116,144,.06), transparent); pointer-events:none; }
-  a { color:var(--green-deep); text-decoration:none; }
-  a:focus-visible, button:focus-visible, summary:focus-visible { outline:3px solid var(--cyan); outline-offset:2px; }
-  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; position:relative; }
-  .tag-txt { font-family:var(--mono); letter-spacing:2px; text-transform:uppercase; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--txt); font-family:var(--mono); overflow-x:hidden; line-height:1.6;
+    background-image:
+      radial-gradient(ellipse 55% 38% at 50% -5%, rgba(47,224,107,.09), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 92% 100%, rgba(63,212,232,.05), transparent); }
+  /* faint scanlines — suite CRT vibe, subtle enough to keep text crisp */
+  body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:1;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 3px); }
+  a { color:var(--green); text-decoration:none; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
+  ::selection { background:var(--green); color:#03180b; }
+  .wrap { max-width:1140px; margin:0 auto; padding:0 24px; position:relative; z-index:2; }
+  .kick { color:var(--amber); font-size:11px; letter-spacing:2.5px; text-transform:uppercase; }
   /* nav */
-  nav { position:sticky; top:0; z-index:50; background:rgba(250,251,252,.88); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
-  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
-  .logo { font-family:var(--mono); font-weight:800; letter-spacing:2px; font-size:16px; color:var(--ink); }
-  .logo em { font-style:normal; color:var(--green); display:block; font-size:8px; letter-spacing:4px; }
-  .nav-links { display:flex; gap:24px; font-size:13px; }
-  .nav-links a { color:var(--ink-soft); }
-  .nav-links a:hover { color:var(--green-deep); }
-  .btn { display:inline-block; border:2px solid var(--green-deep); color:var(--green-deep); padding:10px 22px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.5px; border-radius:6px; cursor:pointer; background:transparent; transition:all .15s; }
-  .btn:hover { background:var(--green-deep); color:#fff; box-shadow:0 4px 16px rgba(10,122,63,.3); }
-  .btn-solid { background:var(--green-deep); color:#fff; }
-  .btn-solid:hover { background:var(--green); box-shadow:0 6px 20px rgba(10,122,63,.4); }
+  nav { position:sticky; top:0; z-index:50; background:rgba(5,8,7,.88); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:58px; }
+  .logo { font-weight:800; letter-spacing:2px; font-size:15px; color:var(--txt); }
+  .logo em { font-style:normal; color:var(--green); display:block; font-size:8px; letter-spacing:4.5px; }
+  .nav-links { display:flex; gap:24px; font-size:12px; }
+  .nav-links a { color:var(--soft); }
+  .nav-links a:hover { color:var(--green-bright); }
+  .btn { display:inline-block; border:1px solid var(--line-bright); color:var(--green-bright); padding:9px 20px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.5px; border-radius:4px; cursor:pointer; background:rgba(47,224,107,.04); transition:all .15s; }
+  .btn:hover { background:var(--green); color:#03180b; box-shadow:0 0 22px rgba(47,224,107,.45); border-color:var(--green); }
+  .btn-solid { background:var(--green); color:#03180b; border-color:var(--green); }
+  .btn-solid:hover { background:var(--green-bright); box-shadow:0 0 30px rgba(77,255,138,.55); }
   /* hero */
-  .hero { text-align:center; padding:100px 0 72px; }
-  .hero .kicker { color:var(--amber); font-size:12px; margin-bottom:18px; }
-  .hero h1 { font-size:clamp(30px,5.2vw,54px); letter-spacing:-1px; line-height:1.1; margin-bottom:22px; color:var(--ink); }
-  .hero h1 .em { color:var(--green-deep); }
-  .hero .slogan { font-family:var(--mono); color:var(--cyan); font-size:clamp(13px,2vw,17px); letter-spacing:1px; margin-bottom:16px; }
-  .hero p { color:var(--ink-soft); font-size:15px; line-height:1.85; max-width:700px; margin:0 auto 36px; }
+  .hero { text-align:center; padding:104px 0 74px; }
+  .hero .kicker { margin-bottom:20px; }
+  .hero h1 { font-size:clamp(28px,5vw,50px); letter-spacing:-.5px; line-height:1.12; margin-bottom:22px; color:var(--txt); font-weight:800; }
+  .hero h1 .em { color:var(--green-bright); text-shadow:0 0 26px rgba(77,255,138,.4); }
+  .hero .slogan { color:var(--cyan); font-size:clamp(13px,2vw,17px); letter-spacing:1px; margin-bottom:18px; }
+  .hero .slogan::after { content:'▮'; margin-left:6px; animation:blink 1.1s steps(1) infinite; color:var(--green); }
+  @keyframes blink { 50% { opacity:0; } }
+  .hero p { color:var(--soft); font-size:14px; line-height:1.9; max-width:720px; margin:0 auto 38px; }
   .hero .cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-  .stats { display:flex; justify-content:center; margin-top:58px; border:1px solid var(--line); border-radius:10px; overflow:hidden; flex-wrap:wrap; background:var(--panel); box-shadow:0 2px 12px rgba(12,18,32,.05); }
-  .stat { padding:20px 34px; border-right:1px solid var(--line); }
+  .stats { display:flex; justify-content:center; margin-top:60px; border:1px solid var(--line); border-radius:8px; overflow:hidden; flex-wrap:wrap; background:var(--panel); box-shadow:0 0 40px rgba(47,224,107,.05), inset 0 1px 0 rgba(255,255,255,.03); }
+  .stat { padding:20px 36px; border-right:1px solid var(--line); }
   .stat:last-child { border-right:0; }
-  .stat b { display:block; color:var(--green-deep); font-family:var(--mono); font-size:24px; }
-  .stat i { font-style:normal; color:var(--ink-faint); font-size:10px; letter-spacing:1.5px; font-family:var(--mono); }
+  .stat b { display:block; color:var(--green-bright); font-size:24px; text-shadow:0 0 14px rgba(77,255,138,.35); }
+  .stat i { font-style:normal; color:var(--faint); font-size:10px; letter-spacing:1.5px; }
   /* sections */
-  section { padding:76px 0; }
+  section { padding:78px 0; }
   .sec-head { text-align:center; margin-bottom:48px; }
-  .sec-head .kick { color:var(--amber); font-size:11px; margin-bottom:10px; }
-  .sec-head h2 { font-size:clamp(22px,3.4vw,32px); color:var(--ink); letter-spacing:-.5px; margin-bottom:12px; }
-  .sec-head p { color:var(--ink-faint); font-size:14px; max-width:640px; margin:0 auto; }
-  .grid { display:grid; gap:18px; }
+  .sec-head .kick { display:block; margin-bottom:12px; }
+  .sec-head h2 { font-size:clamp(20px,3.4vw,30px); color:var(--txt); letter-spacing:.5px; margin-bottom:12px; font-weight:800; }
+  .sec-head h2::before { content:'[ '; color:var(--green-dim); }
+  .sec-head h2::after { content:' ]'; color:var(--green-dim); }
+  .sec-head p { color:var(--faint); font-size:13px; max-width:660px; margin:0 auto; line-height:1.8; }
+  .grid { display:grid; gap:16px; }
   .grid-3 { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
   .grid-5 { grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:26px 22px; transition:border-color .15s, box-shadow .15s; }
-  .card:hover { border-color:var(--green); box-shadow:0 6px 20px rgba(10,122,63,.1); }
-  .card .ic { display:inline-block; font-family:var(--mono); font-weight:700; font-size:15px; padding:5px 10px; border-radius:6px; margin-bottom:12px; }
-  .ic-g { color:var(--green-deep); background:var(--green-tint); }
-  .ic-a { color:var(--amber); background:var(--amber-tint); }
-  .ic-c { color:var(--cyan); background:var(--cyan-tint); }
-  .card h3 { color:var(--ink); font-family:var(--mono); font-size:13px; letter-spacing:1.5px; margin-bottom:9px; }
-  .card p { color:var(--ink-soft); font-size:13px; line-height:1.75; }
-  .card p b { color:var(--ink); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:24px 20px; transition:border-color .15s, box-shadow .15s, transform .15s; position:relative; }
+  .card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--line-bright), transparent); opacity:0; transition:opacity .15s; }
+  .card:hover { border-color:var(--line-bright); box-shadow:0 0 24px rgba(47,224,107,.12); transform:translateY(-2px); }
+  .card:hover::before { opacity:1; }
+  .card .ic { display:inline-block; font-weight:700; font-size:13px; padding:4px 10px; border-radius:4px; margin-bottom:12px; border:1px solid; }
+  .ic-g { color:var(--green-bright); border-color:var(--line-bright); background:rgba(47,224,107,.08); }
+  .ic-a { color:var(--amber); border-color:rgba(245,166,35,.4); background:rgba(245,166,35,.08); }
+  .ic-c { color:var(--cyan); border-color:rgba(63,212,232,.35); background:rgba(63,212,232,.07); }
+  .card h3 { color:var(--green-bright); font-size:12px; letter-spacing:1.5px; margin-bottom:9px; }
+  .card p { color:var(--soft); font-size:12px; line-height:1.75; }
+  .card p b, .card p strong { color:var(--txt); }
   /* anti-fingerprint */
-  .af { border:1px solid var(--line); border-radius:14px; padding:48px; background:linear-gradient(135deg, var(--cyan-tint), var(--panel) 55%); }
-  .af h2 { color:var(--ink); font-size:clamp(20px,2.8vw,27px); margin-bottom:12px; }
-  .af > p { color:var(--ink-soft); font-size:14px; margin-bottom:32px; max-width:640px; }
-  .af-layers { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
-  .layer { border-left:3px solid var(--cyan); padding-left:15px; }
-  .layer h4 { color:var(--cyan); font-family:var(--mono); font-size:11px; letter-spacing:1px; margin-bottom:6px; }
-  .layer p { color:var(--ink-soft); font-size:12px; line-height:1.65; }
+  .af { border:1px solid var(--line); border-radius:10px; padding:48px; background:linear-gradient(135deg, rgba(63,212,232,.06), var(--panel) 55%); box-shadow:inset 0 1px 0 rgba(255,255,255,.03); }
+  .af h2 { color:var(--txt); font-size:clamp(19px,2.8vw,26px); margin-bottom:12px; font-weight:800; }
+  .af h2::before { content:'[ '; color:var(--cyan); opacity:.6; }
+  .af h2::after { content:' ]'; color:var(--cyan); opacity:.6; }
+  .af > p { color:var(--soft); font-size:13px; margin-bottom:34px; max-width:660px; line-height:1.8; }
+  .af-layers { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; }
+  .layer { border-left:2px solid var(--cyan); padding-left:15px; }
+  .layer h4 { color:var(--cyan); font-size:11px; letter-spacing:1.2px; margin-bottom:6px; }
+  .layer p { color:var(--soft); font-size:12px; line-height:1.65; }
   /* pricing */
   .price-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(195px,1fr)); gap:16px; }
-  .price { background:var(--panel); border:2px solid var(--line); border-radius:10px; padding:26px 20px; text-align:center; position:relative; }
-  .price.hot { border-color:var(--green-deep); box-shadow:0 8px 24px rgba(10,122,63,.14); }
-  .price .tag { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--green-deep); color:#fff; font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:1px; padding:4px 12px; border-radius:4px; }
-  .price h3 { color:var(--ink); font-family:var(--mono); font-size:12px; letter-spacing:2px; margin-bottom:14px; }
-  .price .was { display:block; color:var(--ink-faint); font-size:12px; text-decoration:line-through; }
-  .price .amount { display:block; color:var(--green-deep); font-family:var(--mono); font-size:32px; font-weight:800; margin:4px 0; }
-  .price .perday { display:block; color:var(--ink-faint); font-size:11px; margin-bottom:16px; }
+  .price { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:26px 20px; text-align:center; position:relative; transition:border-color .15s, box-shadow .15s; }
+  .price:hover { border-color:var(--line-bright); }
+  .price.hot { border-color:var(--green); box-shadow:0 0 30px rgba(47,224,107,.16); }
+  .price .tag { position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--green); color:#03180b; font-size:9px; font-weight:800; letter-spacing:1px; padding:3px 12px; border-radius:3px; }
+  .price h3 { color:var(--txt); font-size:12px; letter-spacing:2px; margin-bottom:14px; }
+  .price .was { display:block; color:var(--faint); font-size:12px; text-decoration:line-through; }
+  .price .amount { display:block; color:var(--green-bright); font-size:32px; font-weight:800; margin:4px 0; text-shadow:0 0 18px rgba(77,255,138,.35); }
+  .price .perday { display:block; color:var(--faint); font-size:10px; margin-bottom:16px; }
   .price .save { color:var(--amber); font-weight:700; }
   .price ul { list-style:none; margin:0 0 18px; }
-  .price li { color:var(--ink-soft); font-size:12px; padding:6px 0; border-top:1px solid var(--line); }
-  .pay-note { text-align:center; color:var(--ink-faint); font-size:12px; margin-top:24px; }
+  .price li { color:var(--soft); font-size:11px; padding:6px 0; border-top:1px solid var(--line); }
+  .pay-note { text-align:center; color:var(--faint); font-size:11px; margin-top:26px; }
   /* faq */
-  .faq details { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:18px 22px; margin-bottom:12px; }
-  .faq summary { cursor:pointer; color:var(--ink); font-size:14px; font-weight:600; }
-  .faq details p { color:var(--ink-soft); font-size:13px; line-height:1.75; margin-top:10px; }
-  .faq code, .faq strong { color:var(--green-deep); }
+  .faq details { background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:17px 22px; margin-bottom:11px; }
+  .faq summary { cursor:pointer; color:var(--txt); font-size:13px; font-weight:600; letter-spacing:.4px; }
+  .faq summary::before { content:'> '; color:var(--green); }
+  .faq details p { color:var(--soft); font-size:12px; line-height:1.8; margin-top:10px; }
+  .faq code, .faq strong { color:var(--green-bright); }
   /* final */
-  .final { text-align:center; padding-bottom:96px; }
-  .final h2 { color:var(--ink); font-size:clamp(21px,3vw,28px); margin-bottom:14px; }
-  .final p { color:var(--ink-faint); font-size:13px; margin-bottom:30px; }
-  footer { border-top:1px solid var(--line); padding:24px 0 36px; display:flex; justify-content:space-between; color:var(--ink-faint); font-size:12px; flex-wrap:wrap; gap:8px; }
-  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 20px; } }
+  .final { text-align:center; padding-bottom:100px; }
+  .final h2 { color:var(--txt); font-size:clamp(20px,3vw,28px); margin-bottom:14px; font-weight:800; }
+  .final h2::before { content:'[ '; color:var(--green-dim); }
+  .final h2::after { content:' ]'; color:var(--green-dim); }
+  .final p { color:var(--faint); font-size:13px; margin-bottom:32px; }
+  footer { border-top:1px solid var(--line); padding:24px 0 38px; display:flex; justify-content:space-between; color:var(--faint); font-size:11px; flex-wrap:wrap; gap:8px; }
+  @media (max-width:720px) { .nav-links { display:none; } .af { padding:28px; } .stat { padding:14px 18px; } .hero { padding:70px 0 54px; } }
 </style>
 </head>
 <body>
@@ -105,20 +123,20 @@
     <div class="nav-links">
       <a href="#features">Features</a><a href="#engines">Send Engines</a><a href="#antifingerprint">Anti-Fingerprint</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
     </div>
-    <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+    <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
   </div>
 </nav>
 
 <header class="hero wrap">
-  <div class="kicker tag-txt">// self-hosted · AES-256 · zero data leaves your machine</div>
+  <div class="kicker kick">// self-hosted · AES-256 · zero data leaves your machine</div>
   <h1>Your list. Your machine. <span class="em">Your empire.</span></h1>
   <div class="slogan">[ OWN THE WIRE — every send answers to nobody but you ]</div>
   <p>Rubicon Email Suite puts an entire sending operation on your box — fifteen engines, an AI co-pilot that
      sees your live queue, mailbox pools that rotate like clockwork, and fingerprint-stripping armor on every
      message. No rented cloud. No middleman. No one reading your numbers but you.</p>
   <div class="cta">
-    <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
-    <a class="btn" href="#features">See What It Does</a>
+    <a class="btn btn-solid" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
+    <a class="btn" href="#features">[ SEE WHAT IT DOES ]</a>
   </div>
   <div class="stats">
     <div class="stat"><b>15</b><i>SEND ENGINES</i></div>
@@ -130,23 +148,23 @@
 
 <section id="features" class="wrap">
   <div class="sec-head">
-    <div class="kick tag-txt">// the toolbox</div>
+    <span class="kick">// the toolbox</span>
     <h2>Every inch of the send — handled</h2>
     <p>Most senders hand you a compose box and a pray button. Rubicon hands you a console — write, arm, fire, watch it land.</p>
   </div>
   <div class="grid grid-3">
-    <div class="card"><span class="ic ic-g">✉</span><h3>CAMPAIGN EDITOR</h3><p>A/B subject variants, preheader, three body modes, <b>80+ merge tags</b>, attachments that convert to PDF/DOCX/EML/ICS on the fly — over sixty knobs, every one of them yours.</p></div>
-    <div class="card"><span class="ic ic-c">✦</span><h3>RBC HELPER AI</h3><p>A co-pilot docked beside every screen that <b>reads your live state</b> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Ask it anything; it already knows your numbers.</p></div>
-    <div class="card"><span class="ic ic-a">▤</span><h3>VISUAL BUILDER</h3><p>Drag, drop, done. Blocks for headings, buttons, columns and images with a <b>live desktop + mobile preview</b> — what your reader sees is what you see, before a single byte ships.</p></div>
-    <div class="card"><span class="ic ic-g">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP and Microsoft RT/CC mailboxes — each sends as itself with <b>its own daily quota, cooldown and failover</b>. One stalls, the next fires. Your send rate never blinks.</p></div>
-    <div class="card"><span class="ic ic-a">▶</span><h3>SEND CONSOLE</h3><p>The queue obeys you: pause, resume, retry failures, per-account error diagnosis, bounce suppression, scheduled windows, warm-up ramps — <b>beast-mode parallelism</b> when you're ready to burn.</p></div>
-    <div class="card"><span class="ic ic-c">⚠</span><h3>SPAM CHECKER + AI FIXER</h3><p>Your draft gets scored against trigger words, structure and auth before it ever leaves — then <b>one click</b> hands the findings to the AI, and one more applies the rewrite. Inbox placement stops being a coin flip.</p></div>
+    <div class="card"><span class="ic ic-g">✉</span><h3>CAMPAIGN EDITOR</h3><p>A/B subject variants, preheader, three body modes, <strong>80+ merge tags</strong>, attachments that convert to PDF/DOCX/EML/ICS on the fly — over sixty knobs, every one of them yours.</p></div>
+    <div class="card"><span class="ic ic-c">✦</span><h3>RBC HELPER AI</h3><p>A co-pilot docked beside every screen that <strong>reads your live state</strong> — it quotes your quotas, spots your dead mailboxes, rewrites your copy, then applies the fix with one tap. Ask it anything; it already knows your numbers.</p></div>
+    <div class="card"><span class="ic ic-a">▤</span><h3>VISUAL BUILDER</h3><p>Drag, drop, done. Blocks for headings, buttons, columns and images with a <strong>live desktop + mobile preview</strong> — what your reader sees is what you see, before a single byte ships.</p></div>
+    <div class="card"><span class="ic ic-g">⚡</span><h3>MAILBOX POOL</h3><p>Round-robin rotation across SMTP and Microsoft RT/CC mailboxes — each sends as itself with <strong>its own daily quota, cooldown and failover</strong>. One stalls, the next fires. Your send rate never blinks.</p></div>
+    <div class="card"><span class="ic ic-a">▶</span><h3>SEND CONSOLE</h3><p>The queue obeys you: pause, resume, retry failures, per-account error diagnosis, bounce suppression, scheduled windows, warm-up ramps — <strong>beast-mode parallelism</strong> when you're ready to burn.</p></div>
+    <div class="card"><span class="ic ic-c">⚠</span><h3>SPAM CHECKER + AI FIXER</h3><p>Your draft gets scored against trigger words, structure and auth before it ever leaves — then <strong>one click</strong> hands the findings to the AI, and one more applies the rewrite. Inbox placement stops being a coin flip.</p></div>
   </div>
 </section>
 
 <section id="engines" class="wrap">
   <div class="sec-head">
-    <div class="kick tag-txt">// fifteen ways in</div>
+    <span class="kick">// fifteen ways in</span>
     <h2>An engine for every door the inbox has</h2>
     <p>Each engine is its own pipeline — own auth, own error recovery, own personality. If one road closes, you take another.</p>
   </div>
@@ -186,7 +204,7 @@
 
 <section id="pricing" class="wrap">
   <div class="sec-head">
-    <div class="kick tag-txt">// priced to move</div>
+    <span class="kick">// priced to move</span>
     <h2>Every feature. Every plan. 10% under Titan.</h2>
     <p>No tiers of features to upsell you later — duration is the only difference.</p>
   </div>
@@ -197,7 +215,7 @@
       <span class="amount">$71</span>
       <span class="perday">$10.14/day</span>
       <ul><li>1 Week — 7 days</li><li>28 AI credits</li><li>All features included</li></ul>
-      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+      <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
     </div>
     <div class="price">
       <h3>BIWEEKLY</h3>
@@ -205,7 +223,7 @@
       <span class="amount">$143</span>
       <span class="perday">$10.21/day</span>
       <ul><li>2 Weeks — 14 days</li><li>56 AI credits</li><li>All features included</li></ul>
-      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+      <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
     </div>
     <div class="price">
       <h3>STARTER</h3>
@@ -213,7 +231,7 @@
       <span class="amount">$314</span>
       <span class="perday">$10.13/day</span>
       <ul><li>1 Month — 31 days</li><li>120 AI credits</li><li>All features included</li></ul>
-      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+      <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
     </div>
     <div class="price hot">
       <span class="tag">MOST POPULAR</span>
@@ -222,7 +240,7 @@
       <span class="amount">$584</span>
       <span class="perday">$9.57/day <span class="save">· save 10%</span></span>
       <ul><li>2 Months — 61 days</li><li>240 AI credits</li><li>All features included</li></ul>
-      <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+      <a class="btn btn-solid" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
     </div>
     <div class="price">
       <h3>ENTERPRISE</h3>
@@ -230,7 +248,7 @@
       <span class="amount">$809</span>
       <span class="perday">$8.89/day <span class="save">· save 12%</span></span>
       <ul><li>3 Months — 91 days</li><li>360 AI credits</li><li>All features included</li></ul>
-      <a class="btn" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY</a>
+      <a class="btn" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY ]</a>
     </div>
   </div>
   <p class="pay-note">All plans include the complete feature set · payment via crypto · key delivered in Telegram on payment.</p>
@@ -248,7 +266,7 @@
 <section class="final wrap">
   <h2>The wire doesn't rent itself.</h2>
   <p>Local data, AES-256 encryption, fifteen engines, an AI co-pilot — one key unlocks the suite.</p>
-  <a class="btn btn-solid" href="https://t.me/spamszn" target="_blank" rel="noopener">GRAB KEY — MESSAGE ON TELEGRAM</a>
+  <a class="btn btn-solid" href="https://t.me/fuckmonad" target="_blank" rel="noopener">[ GRAB KEY — MESSAGE ON TELEGRAM ]</a>
 </section>
 
 <footer class="wrap">
